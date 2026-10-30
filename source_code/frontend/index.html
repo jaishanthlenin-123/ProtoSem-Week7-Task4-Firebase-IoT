@@ -1,0 +1,79 @@
+<!-- Task 4 Dashboard: index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase IoT Real-Time Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="dashboard-wrapper">
+    <!-- Authentication Card -->
+    <div id="auth-section" class="card auth-card">
+      <h2>IoT Cloud Login</h2>
+      <p class="subtitle">Authenticate with Firebase Authentication</p>
+      <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" id="user-email" placeholder="engineer@iotportfolio.com">
+      </div>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="user-password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢">
+      </div>
+      <button id="login-btn" class="btn btn-primary" onclick="handleLogin()">Sign In to Dashboard</button>
+      <div id="auth-error" class="error-msg"></div>
+    </div>
+
+    <!-- Main Live Telemetry Dashboard (Hidden before login) -->
+    <div id="telemetry-section" class="telemetry-container" style="display:none;">
+      <header class="dashboard-header">
+        <div>
+          <h1>ESP32 Cloud Console</h1>
+          <p class="status-indicator"><span class="pulse-dot"></span> Realtime Database Synced</p>
+        </div>
+        <button class="btn btn-secondary" onclick="handleLogout()">Sign Out</button>
+      </header>
+
+      <!-- Sensor Metric Cards Grid -->
+      <div class="metrics-grid">
+        <div class="card metric-card">
+          <div class="metric-icon temp-icon">ðŸŒ¡ï¸</div>
+          <div class="metric-info">
+            <span class="metric-label">Temperature</span>
+            <span id="val-temp" class="metric-value">--.- Â°C</span>
+          </div>
+        </div>
+
+        <div class="card metric-card">
+          <div class="metric-icon hum-icon">ðŸ’§</div>
+          <div class="metric-info">
+            <span class="metric-label">Humidity</span>
+            <span id="val-hum" class="metric-value">-- %</span>
+          </div>
+        </div>
+
+        <div class="card metric-card">
+          <div class="metric-icon light-icon">â˜€ï¸</div>
+          <div class="metric-info">
+            <span class="metric-label">Ambient Light (LDR)</span>
+            <span id="val-ldr" class="metric-value">----</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Remote Actuator Relay Control Card -->
+      <div class="card control-card">
+        <h3>Bulb Actuator Control (GPIO 5)</h3>
+        <p>Controls physical relay coil via Firebase WebSocket stream</p>
+        <div class="control-row">
+          <span id="bulb-state-label" class="state-badge badge-off">BULB IS OFF</span>
+          <button id="bulb-toggle-btn" class="btn btn-toggle" onclick="toggleBulbState()">Toggle Bulb Power</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
